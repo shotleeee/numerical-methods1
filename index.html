@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI數值方法｜每週作業</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7fa;--grid:#dde5ee;--ink:#12213a;--mute:#556377;--card:#fff;--line:#c9d4e2;--acc:#0b6e66;--accbg:#dff3f0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1826;--grid:#1a2638;--ink:#e6edf6;--mute:#9aa9bd;--card:#16233a;--line:#2b3b55;--acc:#4fd1c5;--accbg:#12342f}}
+:root[data-theme="dark"]{--bg:#0f1826;--grid:#1a2638;--ink:#e6edf6;--mute:#9aa9bd;--card:#16233a;--line:#2b3b55;--acc:#4fd1c5;--accbg:#12342f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Noto Sans TC",system-ui,sans-serif;
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 64px}
+header{padding:56px 0 36px;display:grid;}
+h1{font:900 clamp(34px,6vw,54px)/1.2 "Noto Serif TC",serif;margin:0 0 6px;letter-spacing:.02em}
+.course{font:600 20px "Noto Serif TC",serif;color:var(--acc);margin:0 0 14px}
+.meta{margin:0;color:var(--mute)}
+.meta b{color:var(--ink);font-weight:500}
+svg{width:100%;height:auto;background:var(--card);border:1px solid var(--line);border-radius:6px}
+.cap{font-size:13px;color:var(--mute);margin:6px 0 0}
+.intro{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc);padding:16px 20px;margin-bottom:32px}
+.intro p{margin:0}
+h2{font:600 24px "Noto Serif TC",serif;margin:0 0 14px}
+.list{display:grid;gap:12px}
+details{background:var(--card);border:1px solid var(--line);border-radius:6px}
+summary{cursor:pointer;padding:14px 18px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wk{font:900 18px "Noto Serif TC",serif;color:var(--acc);min-width:3.4em}
+.tt{font-weight:700;flex:1;min-width:10em}
+.dt{font-size:14px;color:var(--mute)}
+.tag{font-size:13px;padding:1px 10px;border-radius:99px;background:var(--accbg);color:var(--acc)}
+.tag.todo{background:transparent;border:1px dashed var(--line);color:var(--mute)}
+summary::after{content:"＋";color:var(--mute);margin-left:auto}
+details[open] summary::after{content:"－"}
+.body{padding:4px 18px 18px;border-top:1px solid var(--line)}
+.sum{margin:12px 0;color:var(--mute)}
+dl{margin:0;display:grid;grid-template-columns:8.5em 1fr;gap:10px 16px}
+dt{font-weight:700}
+dd{margin:0;white-space:pre-line}
+.links a{color:var(--acc);margin-right:16px;font-weight:500}
+footer{margin-top:40px;color:var(--mute);font-size:14px}
+@media (max-width:700px){header{grid-template-columns:1fr;padding-top:32px}dl{grid-template-columns:1fr;gap:2px}dd{margin-bottom:10px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div>
+  <h1 id="name"></h1>
+  <p class="course">AI數值方法｜每週作業</p>
+  <p class="meta" id="meta"></p>
+ </div>
+</header>
+
+<h2>作業總覽</h2>
+<div class="list" id="list"></div>
+<footer>每週作業完成後更新，點開每一週可看到作業要求、我做了什麼、結果與反思。</footer>
+</div>
+
+<script>
+/* ===== 只需修改這一區 ===== */
+const PROFILE = {
+  name: "李帛諺",
+  school: "淡江大學物理系",
+  email: "brian45060205@gmail.com"
+};
+const WEEKS = [
+  { week:1, title:"待上傳", date:"", status:"todo" },
+  { week:2, title:"待上傳", date:"", status:"todo" }
+];
+/* ===== 以下不需修改 ===== */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+$("name").textContent=PROFILE.name;
+document.title=PROFILE.name+"｜AI數值方法每週作業";
+$("meta").innerHTML=`<b>${esc(PROFILE.school)}</b><br>聯絡：<a href="mailto:${esc(PROFILE.email)}" style="color:var(--acc)">${esc(PROFILE.email)}</a>`;
+const rows=[["作業要求","req"],["我做了什麼","did"],["方法與結果","result"],["困難與解決","problem"],["我學到什麼","learn"]];
+$("list").innerHTML=WEEKS.map((w,i)=>{
+  const done=w.status==="done";
+  const head=`<span class="wk">第${w.week}週</span><span class="tt">${esc(w.title)}</span>${w.date?`<span class="dt">${esc(w.date)}</span>`:""}<span class="tag${done?"":" todo"}">${done?"已完成":"尚未上傳"}</span>`;
+  if(!done) return `<details><summary style="cursor:default;pointer-events:none">${head.replace(/<span class="tag/,'<span style="margin-left:auto" class="tag')}</summary></details>`.replace(/summary::after/,"");
+  const dl=rows.map(([k,f])=>`<dt>${k}</dt><dd>${esc(w[f]||"—")}</dd>`).join("");
+  const ln=(w.links||[]).map(l=>`<a href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)}</a>`).join("");
+  return `<details${i===0?" open":""}><summary>${head}</summary><div class="body"><p class="sum">${esc(w.summary||"")}</p><dl>${dl}${ln?`<dt>成品連結</dt><dd class="links">${ln}</dd>`:""}</dl></div></details>`;
+}).join("");
+</script>
+</body>
+</html>
