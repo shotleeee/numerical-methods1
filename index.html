@@ -72,8 +72,22 @@ const PROFILE = {
   email: "brian45060205@gmail.com"
 };
 const WEEKS = [
-  { week:1, title:"待上傳", date:"", status:"todo" },
-  { week:2, title:"待上傳", date:"", status:"todo" }
+  { week:1, title:"生成個人網站", date:"", status:"done",
+    summary:"使用 AI 協助，製作用來存放「AI數值方法」每週作業的個人網站。",
+    req:"建立個人網站，讓老師可以查看每週作業。",
+    did:"請 AI 生成網站，內容包含姓名、學校系所、聯絡方式，以及每週作業總覽，可點開查看各週內容。",
+    result:"完成網站，網站會依週次列出作業，並標示「已完成」或「尚未上傳」。",
+    problem:"網站一開始無法分享給老師，後來改用 GitHub Pages 發布，才有公開網址。",
+    learn:"學會用 AI 生成網頁，並了解網站需要發布到公開平台，別人才能打開。",
+    links:[] },
+  { week:2, title:"再次上傳個人網站", date:"", status:"done",
+    summary:"將個人網站上傳到 GitHub Pages，取得可供老師開啟的公開網址。",
+    req:"將個人網站上傳並發布，讓老師能打開查看。",
+    did:"註冊 GitHub、建立公開儲存庫、上傳 index.html，並在 Settings 的 Pages 開啟網站發布。",
+    result:"網站成功上線，網址：https://shotleeee.github.io/numerical-methods1/",
+    problem:"發布後一開始看不到網址，需要等待建置並檢查儲存庫與 Pages 設定。",
+    learn:"學會 GitHub Pages 的發布流程，之後只要上傳新的 index.html 就能更新網站。",
+    links:[ {t:"網站網址", u:"https://shotleeee.github.io/numerical-methods1/"} ] }
 ];
 /* ===== 以下不需修改 ===== */
 const $=id=>document.getElementById(id);
